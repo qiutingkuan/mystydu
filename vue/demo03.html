@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>父组件与子组件之间的通信</title>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="app">
+			<!-- 子组件(局部组件) -->
+			<local-component :link="nav" :kecheng="courses"></local-component>
+			<!-- 子组件(全局组件) -->
+			<global-component :link="nav"></global-component>
+		</div>
+		<script src="js/vue.js"></script>
+		<script>
+			//创建子组件(全局组件)
+			Vue.component("global-component",{
+				props:["link"],
+				template:"<ul><li v-for='item in link'>{{item}}</li></ul>"
+			});
+			
+			//创建VUE实例 父组件
+			var vm = new Vue({
+				el:"#app",
+				data:{
+					nav:["首页","新闻","直播","日志"],
+					courses:"课程"
+				},
+				//创建子组件(局部组件)
+				components:{
+					"local-component":{
+						data:function(){
+							return{title:"学会VUE.JS日赚百万不在是梦想！"}
+						},
+						//接收父组件数据
+						props:["link","kecheng"],
+						template:"<div><ul><li v-for='item in link'><a href=''>{{item}}</a></li></ul><p>{{kecheng}}</p></div>"
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

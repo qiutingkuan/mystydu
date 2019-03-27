@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>全局组件</title>
+		<style>
+		</style>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="app">
+		 <globe-component></globe-component>
+		</div>
+		<script>
+			//创建全局组件
+			Vue.component('globe-component',{
+				  //组件私有数据
+					data:function(){
+						return {
+							site:"127.0.0.1",
+							courses:["PHP","HTML5","CSS3"]
+						}
+					},
+					//创建模板
+					template:"<div><p>{{site}}</p><ul><li v-for='item in courses'>{{item}}</li></ul></div>"
+			})
+			//创建VUE实例
+			let vm = new Vue({
+				el:"#app"
+			})
+		</script>
+	</body>
+</html>
